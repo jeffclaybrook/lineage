@@ -33,7 +33,7 @@ const config = {
 
 export function DashboardLineChart() {
  return (
-  <Card className="col-span-6">
+  <Card className="col-span-12 lg:col-span-6">
    <CardHeader>
     <div className="flex items-center justify-between">
      <CardTitle className="text-sm">New Leads & Customers</CardTitle>

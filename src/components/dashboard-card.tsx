@@ -15,7 +15,7 @@ export function DashboardCard({
  Icon
 }: DashboardCardProps) {
  return (
-  <Card className="col-span-3">
+  <Card className="col-span-12 lg:col-span-3">
    <CardHeader>
     <div className="flex items-center justify-between">
      <p className="text-sm">{label}</p>
