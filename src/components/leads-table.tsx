@@ -334,7 +334,7 @@ export function LeadsTable() {
  })
 
  return (
-  <div className="w-full p-4">
+  <div className="col-span-12 lg:col-span-9">
    <div className="flex items-center gap-4 pb-4">
     <Input
      placeholder="Search..."
