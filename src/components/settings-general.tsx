@@ -125,6 +125,7 @@ export function SettingsGeneral() {
         <Input type="text" id="zipCode" placeholder="Zip Code" />
        </div>
       </div>
+      <Button>Save</Button>
      </form>
     </CardHeader>
    </Card>

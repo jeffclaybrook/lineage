@@ -1,8 +1,10 @@
 import { Suspense } from "react"
 import { DollarSign, Users, UserCheck, UserPlus } from "lucide-react"
+import { DashboardAreaChart } from "@/components/dashboard-area-chart"
 import { DashboardBarChart } from "@/components/dashboard-bar-chart"
 import { DashboardCard } from "@/components/dashboard-card"
 import { DashboardLineChart } from "@/components/dashboard-line-chart"
+import { DashboardTable } from "@/components/dashboard-table"
 import { DashboardPieChart } from "@/components/dashboard-pie-chart"
 import { Header } from "@/components/header"
 import { Loader } from "@/components/loader"
@@ -40,6 +42,8 @@ export default function Metrics() {
      <DashboardBarChart />
      <DashboardPieChart />
      <DashboardLineChart />
+     <DashboardAreaChart />
+     <DashboardTable />
     </div>
    </Suspense>
   </main>
