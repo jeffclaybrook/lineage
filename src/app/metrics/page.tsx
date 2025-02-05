@@ -1,11 +1,11 @@
 import { Suspense } from "react"
 import { DollarSign, Users, UserCheck, UserPlus } from "lucide-react"
-import { DashboardCard } from "@/components/dashboard-card"
-import { DashboardLineChart } from "@/components/dashboard-line-chart"
-import { DashboardTable } from "@/components/dashboard-table"
-import { DashboardPieChart } from "@/components/dashboard-pie-chart"
 import { MetricsAreaChart } from "@/components/metrics-area-chart"
 import { MetricsBarChart } from "@/components/metrics-bar-chart"
+import { MetricsCard } from "@/components/metrics-card"
+import { MetricsLineChart } from "@/components/metrics-line-chart"
+import { MetricsPieChart } from "@/components/metrics-pie-chart"
+import { MetricsTable } from "@/components/metrics-table"
 import { Header } from "@/components/header"
 import { Loader } from "@/components/loader"
 
@@ -14,37 +14,36 @@ export default function Metrics() {
   <main className="flex flex-1 flex-col w-full pb-4">
    <Header title="Metrics" />
    <Suspense fallback={<Loader />}>
-    <div className="grid lg:grid-cols-12 gap-4 p-4">
-     <DashboardCard
-      label="Leads"
-      amount="1,125"
+    <div className="grid grid-cols-12 gap-4 p-4">
+     <MetricsCard
+      title="1,125"
       description="All time"
+      label="Leads"
       Icon={Users}
      />
-     <DashboardCard
-      label="Customers"
-      amount="225"
+     <MetricsCard
+      title="225"
       description="+22 this month"
+      label="Customers"
       Icon={UserCheck}
      />
-     <DashboardCard
-      label="Revenue"
-      amount="$8,000"
+     <MetricsCard
+      title="$8,000"
       description="This year"
+      label="Revenue"
       Icon={DollarSign}
      />
-     <DashboardCard
-      label="New Leads"
-      amount="+216"
+     <MetricsCard
+      title="+216"
       description="This month"
+      label="New Leads"
       Icon={UserPlus}
      />
      <MetricsBarChart />
-     <DashboardPieChart />
-     <DashboardLineChart />
+     <MetricsPieChart />
+     <MetricsLineChart />
      <MetricsAreaChart />
-     <DashboardTable />
-     <DashboardTable />
+     <MetricsTable />
     </div>
    </Suspense>
   </main>

@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
-import { Card, CardTitle } from "@/components/ui/card"
+import { Card, CardDescription, CardTitle } from "@/components/ui/card"
 import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip } from "./ui/chart"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
 
@@ -106,8 +106,11 @@ export function MetricsAreaChart() {
 
  return (
   <Card className="col-span-12">
-   <div className="flex items-center justify-between p-4">
-    <CardTitle className="text-sm">Customer conversions</CardTitle>
+   <div className="flex items-start justify-between p-6">
+    <div className="flex flex-col space-y-1">
+     <CardTitle className="text-sm">Customer conversions</CardTitle>
+     <CardDescription>Last 3 months</CardDescription>
+    </div>
     <Select value={timeRange} onValueChange={setTimeRange}>
      <SelectTrigger
       aria-label="Select a value"
@@ -122,7 +125,7 @@ export function MetricsAreaChart() {
      </SelectContent>
     </Select>
    </div>
-   <ChartContainer config={config} className="w-full max-h-[300px]">
+   <ChartContainer config={config} className="w-full max-h-[300px] p-4">
     <AreaChart data={filteredData}>
      <linearGradient
       id="fillAverage"
