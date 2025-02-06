@@ -22,8 +22,8 @@ const data = [
 
 export function SettingsCalling() {
  return (
-  <section className="grid lg:grid-cols-2 gap-4 p-4">
-   <Card>
+  <section className="grid grid-cols-12 gap-4 p-4">
+   <Card className="col-span-12 lg:col-span-6">
     <CardHeader>
      <CardTitle className="text-sm">My Callback Number</CardTitle>
      <CardDescription>All incoming calls will be routed to this number</CardDescription>
@@ -35,9 +35,9 @@ export function SettingsCalling() {
      </Button>
     </CardContent>
    </Card>
-   <Card>
+   <Card className="col-span-12 lg:col-span-6">
     <CardHeader>
-     <div className="flex items-start justify-between">
+     <div className="flex items-start justify-between gap-4">
       <div className="flex flex-col space-y-1">
        <CardTitle className="text-sm">My Phone Numbers</CardTitle>
        <CardDescription>Select an unlimited number of custom outbound caller IDs.</CardDescription>
@@ -63,7 +63,7 @@ export function SettingsCalling() {
      </div>
     </CardContent>
    </Card>
-   <Card className="col-span-2">
+   <Card className="col-span-12">
     <CardHeader>
      <CardTitle className="text-sm">Call Recordings</CardTitle>
     </CardHeader>
@@ -73,9 +73,6 @@ export function SettingsCalling() {
        <TableRow>
         <TableHead className="w-[150px]">Lead</TableHead>
         <TableHead>Date & Time</TableHead>
-        <TableHead>From Number</TableHead>
-        <TableHead>To Number</TableHead>
-        <TableHead>Duration</TableHead>
         <TableHead className="text-right">Recording</TableHead>
        </TableRow>
       </TableHeader>
@@ -84,9 +81,6 @@ export function SettingsCalling() {
         <TableRow key={i}>
          <TableCell className="font-medium">{recording.lead}</TableCell>
          <TableCell>{recording.dateTime}</TableCell>
-         <TableCell>{recording.fromNumber}</TableCell>
-         <TableCell>{recording.toNumber}</TableCell>
-         <TableCell>{recording.duration}</TableCell>
          <TableCell className="text-right">
           <Button size="icon" variant="secondary">
            <Play className="h-4 w-4" />
