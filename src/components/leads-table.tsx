@@ -309,10 +309,10 @@ export const columns: ColumnDef<Lead>[] = [
 ]
 
 export function LeadsTable() {
- const [sorting, setSorting] = useState<SortingState>([])
- const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
- const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
- const [rowSelection, setRowSelection] = useState({})
+ const [ sorting, setSorting ] = useState<SortingState>([])
+ const [ columnFilters, setColumnFilters ] = useState<ColumnFiltersState>([])
+ const [ columnVisibility, setColumnVisibility ] = useState<VisibilityState>({})
+ const [ rowSelection, setRowSelection ] = useState({})
 
  const table = useReactTable({
   data,
@@ -335,37 +335,43 @@ export function LeadsTable() {
 
  return (
   <div className="col-span-12 lg:col-span-9">
-   <div className="flex items-center gap-4 pb-4">
-    <Input
-     placeholder="Search..."
-     value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-     className="max-w-sm"
-     onChange={(e) => table.getColumn("name")?.setFilterValue(e.target.value)}
-    />
-    <DropdownMenu>
-     <DropdownMenuTrigger asChild>
-      <Button variant="outline" className="ml-left">
-       Columns
-       <ChevronDown />
-      </Button>
-     </DropdownMenuTrigger>
-     <DropdownMenuContent align="end">
-      {table
-       .getAllColumns()
-       .filter((column) => column.getCanHide())
-       .map((column) => (
-        <DropdownMenuCheckboxItem
-         key={column.id}
-         className="capitalize"
-         checked={column.getIsVisible()}
-         onCheckedChange={(value) => column.toggleVisibility(!!value)}
-        >
-         {column.id}
-        </DropdownMenuCheckboxItem>
-       ))
-      }
-     </DropdownMenuContent>
-    </DropdownMenu>
+   <div className="flex items-center justify-between gap-8 pb-4">
+    <div className="flex items-center gap-4 flex-1">
+     <Input
+      placeholder="Search..."
+      value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+      className="w-full"
+      onChange={(e) => table.getColumn("name")?.setFilterValue(e.target.value)}
+     />
+     <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+       <Button variant="outline" className="hidden lg:flex">
+        Columns
+        <ChevronDown />
+       </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+       {table
+        .getAllColumns()
+        .filter((column) => column.getCanHide())
+        .map((column) => (
+         <DropdownMenuCheckboxItem
+          key={column.id}
+          className="capitalize"
+          checked={column.getIsVisible()}
+          onCheckedChange={(value) => column.toggleVisibility(!!value)}
+         >
+          {column.id}
+         </DropdownMenuCheckboxItem>
+        ))
+       }
+      </DropdownMenuContent>
+     </DropdownMenu>
+    </div>
+    <div className="flex items-center justify-end gap-4 flex-1">
+     <Button>Create</Button>
+     <Button variant="outline">CSV</Button>
+    </div>
    </div>
    <div className="rounded-md border">
     <Table>
