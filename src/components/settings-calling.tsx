@@ -25,8 +25,10 @@ export function SettingsCalling() {
   <section className="grid grid-cols-12 gap-4 p-4">
    <Card className="col-span-12 lg:col-span-6">
     <CardHeader>
-     <CardTitle className="text-sm">My Callback Number</CardTitle>
-     <CardDescription>All incoming calls will be routed to this number</CardDescription>
+     <div className="flex flex-col space-y-1">
+      <CardTitle className="text-sm">My Callback Number</CardTitle>
+      <CardDescription>All incoming calls will be routed to this number</CardDescription>
+     </div>
     </CardHeader>
     <CardContent className="flex items-center justify-between">
      <p>(512) 422-3292</p>
@@ -65,13 +67,16 @@ export function SettingsCalling() {
    </Card>
    <Card className="col-span-12">
     <CardHeader>
-     <CardTitle className="text-sm">Call Recordings</CardTitle>
+     <div className="flex flex-col space-y-1">
+      <CardTitle className="text-sm">Call Recordings</CardTitle>
+      <CardDescription>My recordings</CardDescription>
+     </div>
     </CardHeader>
     <CardContent>
      <Table>
       <TableHeader>
        <TableRow>
-        <TableHead className="w-[150px]">Lead</TableHead>
+        <TableHead>Lead</TableHead>
         <TableHead>Date & Time</TableHead>
         <TableHead className="text-right">Recording</TableHead>
        </TableRow>

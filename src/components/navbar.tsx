@@ -110,23 +110,31 @@ export function Navbar({ ...props }: ComponentProps<typeof Sidebar>) {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
          <DropdownMenuItem>
-          <Sparkles />
-          Upgrade to Pro
+          <Link href={"/upgrade-to-pro"} className="flex items-center gap-2 w-full">
+           <Sparkles />
+           Upgrade to Pro
+          </Link>
          </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
          <DropdownMenuItem>
-          <BadgeCheck />
-          Account
+          <Link href={"/account"} className="flex items-center gap-2 w-full">
+           <BadgeCheck />
+           Account
+          </Link>
          </DropdownMenuItem>
          <DropdownMenuItem>
-          <CreditCard />
-          Billing
+          <Link href={"/billing"} className="flex items-center gap-2 w-full">
+           <CreditCard />
+           Billing
+          </Link>
          </DropdownMenuItem>
          <DropdownMenuItem>
-          <Bell />
-          Notifications
+          <Link href={"/notifications"} className="flex items-center gap-2 w-full">
+           <Bell />
+           Notifications
+          </Link>
          </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />

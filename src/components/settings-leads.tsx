@@ -17,8 +17,8 @@ const data = [
 
 export function SettingsLeads() {
  return (
-  <section className="space-y-4 p-4">
-   <Button>
+  <section className="flex flex-col gap-4 p-4">
+   <Button className="ml-auto">
     <Plus />
     Create New Status
    </Button>
@@ -36,7 +36,7 @@ export function SettingsLeads() {
        <TableRow key={i}>
         <TableCell>{status.label}</TableCell>
         <TableCell>
-         <span className={`flex w-4 h-4 rounded-md bg-[${status.color}]`}></span>
+         <span className={`flex w-4 h-4 rounded-md bg-[${status.color}]`} />
         </TableCell>
         <TableCell className="flex items-center justify-end gap-2">
          <Button size="icon" variant="secondary">
