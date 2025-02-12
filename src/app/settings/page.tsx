@@ -1,16 +1,16 @@
 import { Suspense } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Header } from "@/components/header"
-import { Loader } from "@/components/loader"
-import { SettingsPolicies } from "@/components/settings-policies"
-import { SettingsCalling } from "@/components/settings-calling"
-import { SettingsCarriers } from "@/components/settings-carriers"
-import { SettingsGeneral } from "@/components/settings-general"
-import { SettingsLeads } from "@/components/settings-leads"
+import { Header } from "@/components/common/header"
+import { Loader } from "@/components/common/loader"
+import { SettingsCalling } from "@/components/settings/settings-calling"
+import { SettingsGeneral } from "@/components/settings/settings-general"
+import { SettingsLeads } from "@/components/settings/settings-leads"
+import { SettingsPolicies } from "@/components/settings/settings-policies"
+import { SettingsCarriers } from "@/components/settings/settings-carriers"
 
-export default function Settings() { 
+export default function Settings() {
  return (
-  <main className="flex flex-1 flex-col w-full pb-4">
+  <main className="flex flex-col flex-1 w-full">
    <Header title="Settings" />
    <Suspense fallback={<Loader />}>
     <Tabs defaultValue="general">
@@ -38,6 +38,6 @@ export default function Settings() {
      </TabsContent>
     </Tabs>
    </Suspense>
-  </main>
+  </main >
  )
 }

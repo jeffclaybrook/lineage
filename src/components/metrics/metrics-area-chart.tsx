@@ -2,13 +2,13 @@
 
 import { useState } from "react"
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
-import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip } from "./ui/chart"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
+import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip } from "../ui/chart"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 
 export type Data = {
- date: string
- average: number
- customers: number
+  date: string
+  average: number
+  customers: number
 }
 
 const data: Data[] = [

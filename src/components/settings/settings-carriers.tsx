@@ -1,10 +1,9 @@
 "use client"
 
 import { EllipsisVertical, Plus } from "lucide-react"
-import { Button } from "./ui/button"
-import { Card } from "./ui/card"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table"
+import { Button } from "../ui/button"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table"
 
 const data = [
  {
@@ -26,14 +25,14 @@ export function SettingsCarriers() {
     <Plus />
     Add New Carrier
    </Button>
-   <Card>
+   <div className="border rounded-md">
     <Table>
      <TableHeader>
       <TableRow>
        <TableHead>Carrier Name</TableHead>
        <TableHead>Carrier Plan Code</TableHead>
        <TableHead>Carrier Plan Name</TableHead>
-       <TableHead></TableHead>
+       <TableHead>Action</TableHead>
       </TableRow>
      </TableHeader>
      <TableBody>
@@ -63,7 +62,7 @@ export function SettingsCarriers() {
       ))}
      </TableBody>
     </Table>
-   </Card>
+   </div>
   </section>
  )
 }

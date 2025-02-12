@@ -1,12 +1,12 @@
 import { Suspense } from "react"
-import { CircleDollarSign, DollarSign, Users, UserCheck } from "lucide-react"
-import { MetricsAreaChart } from "@/components/metrics-area-chart"
-import { MetricsBarChart } from "@/components/metrics-bar-chart"
-import { MetricsCard } from "@/components/metrics-card"
-import { MetricsPieChart } from "@/components/metrics-pie-chart"
-import { MetricsTable } from "@/components/metrics-table"
-import { Header } from "@/components/header"
-import { Loader } from "@/components/loader"
+import { CircleDollarSign, DollarSign, UserCheck, Users } from "lucide-react"
+import { Header } from "@/components/common/header"
+import { Loader } from "@/components/common/loader"
+import { MetricsAreaChart } from "@/components/metrics/metrics-area-chart"
+import { MetricsBarChart } from "@/components/metrics/metrics-bar-chart"
+import { MetricsCard } from "@/components/metrics/metrics-card"
+import { MetricsPieChart } from "@/components/metrics/metrics-pie-chart"
+import { MetricsTable } from "@/components/metrics/metrics-table"
 
 export default function Metrics() {
  return (

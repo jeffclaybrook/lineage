@@ -3,13 +3,12 @@
 import { useState } from "react"
 import { ColumnDef, ColumnFiltersState, SortingState, VisibilityState, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table"
 import { ArrowUpDown, ChevronDown, MoreVertical, Upload } from "lucide-react"
-import { Button } from "./ui/button"
-import { Checkbox } from "./ui/checkbox"
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu"
-import { Input } from "./ui/input"
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
-
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table"
+import { Button } from "../ui/button"
+import { Checkbox } from "../ui/checkbox"
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu"
+import { Input } from "../ui/input"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 import { LeadsCreate } from "./leads-create"
 
 export type Lead = {
@@ -22,7 +21,13 @@ export type Lead = {
  zip: string
 }
 
-const statuses = [
+export type Status = {
+ color: "#ff7f50" | "#ff0000" | "#01bfff" | "#008800" | "#000000" | "#ffd700" | "#1d00ff" | "#4682b4"
+ status: "New Lead" | "Calling" | "Appointment" | "Door Knock" | "Dead Lead" | "Customer" | "No Show" | "Agent Follow Up" | "Setter Follow Up"
+ amount: number
+}
+
+const status: Status[] = [
  { color: "#ff7f50", status: "Agent Follow Up", amount: 2 },
  { color: "#ff0000", status: "Appointment", amount: 2 },
  { color: "#01bfff", status: "Calling", amount: 0 },
@@ -268,10 +273,10 @@ export const columns: ColumnDef<Lead>[] = [
      </SelectTrigger>
      <SelectContent>
       <SelectGroup>
-       {statuses.map((status, i) => (
+       {status.map((status, i) => (
         <SelectItem key={i} value={status.status}>
          <div className="flex items-center gap-4">
-          <span className={`flex h-4 w-4 rounded-full bg-[${status.color}]`} />
+          <span className="h-4 w-4 flex rounded-full" style={{ backgroundColor: `${status.color}`}} />
           {status.status}
          </div>
         </SelectItem>
@@ -338,10 +343,10 @@ export const columns: ColumnDef<Lead>[] = [
 ]
 
 export function LeadsTable() {
- const [ sorting, setSorting ] = useState<SortingState>([])
- const [ columnFilters, setColumnFilters ] = useState<ColumnFiltersState>([])
- const [ columnVisibility, setColumnVisibility ] = useState<VisibilityState>({})
- const [ rowSelection, setRowSelection ] = useState({})
+ const [sorting, setSorting] = useState<SortingState>([])
+ const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+ const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+ const [rowSelection, setRowSelection] = useState({})
 
  const table = useReactTable({
   data,
@@ -448,10 +453,10 @@ export function LeadsTable() {
     </div>
     <div className="col-span-12 lg:col-span-3 rounded-md border p-4">
      <ul className="space-y-3">
-      {statuses.map((status, i) => (
+      {status.map((status, i) => (
        <li key={i} className="flex items-center justify-between text-sm">
         <div className="flex items-center gap-4">
-         <span className={`h-4 w-4 flex rounded-full bg-[${status.color}]`} />
+         <span className="h-4 w-4 flex rounded-full" style={{ backgroundColor: `${status.color}`}} />
          {status.status}
         </div>
         <div className="font-medium">{status.amount}</div>

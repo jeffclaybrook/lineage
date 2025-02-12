@@ -2,12 +2,12 @@
 
 import { useMemo, useState } from "react"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
-import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "./ui/chart"
+import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart"
 
 export type Data = {
- date: string
- leads: number
- customers: number
+  date: string
+  leads: number
+  customers: number
 }
 
 const data: Data[] = [

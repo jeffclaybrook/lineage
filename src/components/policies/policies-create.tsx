@@ -1,9 +1,12 @@
-import { Plus } from "lucide-react"
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "./ui/alert-dialog"
-import { Button } from "./ui/button"
-import { Input } from "./ui/input"
-import { Label } from "./ui/label"
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "./ui/select"
+import { CalendarIcon, Plus } from "lucide-react"
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "../ui/alert-dialog"
+import { Button } from "../ui/button"
+import { Calendar } from "../ui/calendar"
+import { Input } from "../ui/input"
+import { Label } from "../ui/label"
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select"
+import { Separator } from "../ui/separator"
 
 export type State = {
  value: string
@@ -63,7 +66,7 @@ const states: State[] = [
  { value: "wyoming", label: "Wyoming" }
 ]
 
-export function LeadsCreate() {
+export function PoliciesCreate() {
  return (
   <AlertDialog>
    <AlertDialogTrigger asChild>
@@ -73,8 +76,8 @@ export function LeadsCreate() {
    </AlertDialogTrigger>
    <AlertDialogContent>
     <AlertDialogHeader>
-     <AlertDialogTitle>Create lead</AlertDialogTitle>
-     <AlertDialogDescription>Create a new lead</AlertDialogDescription>
+     <AlertDialogTitle>Create policy</AlertDialogTitle>
+     <AlertDialogDescription>Create a new policy</AlertDialogDescription>
     </AlertDialogHeader>
     <form className="grid lg:grid-cols-12 gap-4">
      <div className="col-span-6 space-y-1.5">
@@ -120,6 +123,62 @@ export function LeadsCreate() {
      <div className="col-span-5 space-y-1.5">
       <Label htmlFor="phone">Phone</Label>
       <Input type="text" id="phone" placeholder="Phone" />
+     </div>
+     <div className="col-span-4 space-y-1.5">
+      <Label htmlFor="dateOfBirth">Date of Birth</Label>
+      <Popover>
+       <PopoverTrigger asChild>
+        <div>
+         <Button variant="outline" className="flex items-center justify-between w-full" type="button">
+          Select a Date
+          <CalendarIcon />
+         </Button>
+        </div>
+       </PopoverTrigger>
+       <PopoverContent className="w-auto p-0" align="start">
+        <Calendar mode="single" />
+       </PopoverContent>
+      </Popover>
+     </div>
+     <div className="col-span-4 space-y-1.5">
+      <Label htmlFor="gender">Gender</Label>
+      <Select>
+       <SelectTrigger>
+        <SelectValue placeholder="Gender" />
+       </SelectTrigger>
+       <SelectContent>
+        <SelectGroup>
+         <SelectLabel>Gender</SelectLabel>
+         <SelectItem value="male">Male</SelectItem>
+         <SelectItem value="female">Female</SelectItem>
+         <SelectItem value="other">Other</SelectItem>
+        </SelectGroup>
+       </SelectContent>
+      </Select>
+     </div>
+     <div className="col-span-4 space-y-1.5">
+      <Label htmlFor="tobaccoUse">Tobacco Use</Label>
+      <Select>
+       <SelectTrigger>
+        <SelectValue placeholder="Select" />
+       </SelectTrigger>
+       <SelectContent>
+        <SelectGroup>
+         <SelectLabel>Tobacco Use</SelectLabel>
+         <SelectItem value="smoker">Smoker</SelectItem>
+         <SelectItem value="nonSmoker">Non-smoker</SelectItem>
+         <SelectItem value="chewerDipper">Chewer / Dipper</SelectItem>
+         <SelectItem value="unknown">Unknown</SelectItem>
+         <SelectItem value="eCig">E-Cig</SelectItem>
+         <SelectItem value="cigar">Cigar</SelectItem>
+        </SelectGroup>
+       </SelectContent>
+      </Select>
+     </div>
+     <Separator className="col-span-12 my-4" />
+     <div className="col-span-6 space-y-1.5">
+      <Label htmlFor="policyNumber">Policy Number</Label>
+      <Input type="text" id="policyNumber" placeholder="Policy Number" />
      </div>
     </form>
     <AlertDialogFooter>

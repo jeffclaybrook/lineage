@@ -1,10 +1,10 @@
 import { Suspense } from "react"
-import { Header } from "@/components/header"
-import { Loader } from "@/components/loader"
+import { Header } from "@/components/common/header"
+import { Loader } from "@/components/common/loader"
 
-export default function Billing() { 
+export default function Billing() {
  return (
-  <main className="flex flex-1 flex-col w-full pb-4">
+  <main className="flex flex-col flex-1 w-full">
    <Header title="Billing" />
    <Suspense fallback={<Loader />}>
     <Loader />

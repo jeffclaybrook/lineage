@@ -1,13 +1,7 @@
 import { Sheet } from "lucide-react"
-import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "./ui/table"
+import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "../ui/table"
 
-export type Invoice = {
- invoice: string
- method: string
- amount: string
-}
-
-const data: Invoice[] = [
+const data = [
  { invoice: "INV001", method: "Credit Card", amount: "$250.00" },
  { invoice: "INV002", method: "PayPal", amount: "$150.00" },
  { invoice: "INV003", method: "Bank Transfer", amount: "$350.00" },

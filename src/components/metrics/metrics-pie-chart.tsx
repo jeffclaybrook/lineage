@@ -2,15 +2,21 @@
 
 import { Label, Pie, PieChart } from "recharts"
 import { ChartPie } from "lucide-react"
-import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "./ui/chart"
+import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart"
 
-const data = [
- { status: "appointment", leads: 54, fill: "var(--color-appointment)" },
- { status: "customer", leads: 64, fill: "var(--color-customer)" },
- { status: "deadLead", leads: 44, fill: "var(--color-deadLead)" },
- { status: "doorKnock", leads: 60, fill: "var(--color-doorKnock)" },
- { status: "followUp", leads: 60, fill: "var(--color-followUp)" },
- { status: "newLead", leads: 70, fill: "var(--color-newLead)" },
+export type Data = {
+ status: "Appointment" | "Customer" | "Dead Lead" | "Door Knock" | "Follow Up" | "New Lead"
+ leads: number
+ fill: string
+}
+
+const data: Data[] = [
+ { status: "Appointment", leads: 54, fill: "var(--color-appointment)" },
+ { status: "Customer", leads: 64, fill: "var(--color-customer)" },
+ { status: "Dead Lead", leads: 44, fill: "var(--color-deadLead)" },
+ { status: "Door Knock", leads: 60, fill: "var(--color-doorKnock)" },
+ { status: "Follow Up", leads: 60, fill: "var(--color-followUp)" },
+ { status: "New Lead", leads: 70, fill: "var(--color-newLead)" },
 ]
 
 const config = {

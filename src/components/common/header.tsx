@@ -2,8 +2,8 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Breadcrumb, BreadcrumbItem, BreadcrumbPage } from "./ui/breadcrumb"
-import { SidebarTrigger } from "./ui/sidebar"
+import { Breadcrumb, BreadcrumbItem, BreadcrumbPage } from "../ui/breadcrumb"
+import { SidebarTrigger } from "../ui/sidebar"
 import { ModeToggle } from "./mode-toggle"
 
 interface HeaderProps {

@@ -1,9 +1,13 @@
 import { Pencil, Plus, Trash2 } from "lucide-react"
-import { Button } from "./ui/button"
-import { Card } from "./ui/card"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table"
+import { Button } from "../ui/button"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table"
 
-const data = [
+export type Policy = {
+ label: "Waiting to Submit" | "Submitted to Carrier" | "Active Policy" | "Not Taken by Client" | "Declined by Carrier" | "Client Deceased" | "In Danger of Lapse" | "Lapsed" | "Cancelled"
+ color: "#ff7f50" | "#ff0000" | "#01bfff" | "#008800" | "#000000" | "#ffd700" | "#1d00ff" | "#a0522d" | "#4682b4"
+}
+
+const policies: Policy[] = [
  { label: "Waiting to Submit", color: "#ff7f50" },
  { label: "Submitted to Carrier", color: "#ff0000" },
  { label: "Active Policy", color: "#01bfff" },
@@ -12,7 +16,7 @@ const data = [
  { label: "Client Deceased", color: "#ffd700" },
  { label: "In Danger of Lapse", color: "#1d00ff" },
  { label: "Lapsed", color: "#a0522d" },
- { label: "Canceled", color: "#4682b4" },
+ { label: "Cancelled", color: "#4682b4" }
 ]
 
 export function SettingsPolicies() {
@@ -20,29 +24,29 @@ export function SettingsPolicies() {
   <section className="flex flex-col gap-4 p-4">
    <Button className="ml-auto">
     <Plus />
-    Create New Status
+    Create New Policy
    </Button>
-   <Card>
+   <div className="border rounded-md">
     <Table>
      <TableHeader>
       <TableRow>
-       <TableHead>Status</TableHead>
+       <TableHead>Policy</TableHead>
        <TableHead>Color</TableHead>
        <TableHead className="text-right">Action</TableHead>
       </TableRow>
      </TableHeader>
      <TableBody>
-      {data.map((status, i) => (
+      {policies.map((policy, i) => (
        <TableRow key={i}>
-        <TableCell>{status.label}</TableCell>
+        <TableCell>{policy.label}</TableCell>
         <TableCell>
-         <span className={`flex w-4 h-4 rounded-md bg-[${status.color}]`} />
+         <span className="h-4 w-4 flex rounded-full" style={{ backgroundColor: `${policy.color}`}} />
         </TableCell>
         <TableCell className="flex items-center justify-end gap-2">
-         <Button size="icon" variant="secondary">
+         <Button variant="secondary" size="icon">
           <Pencil className="h-4 w-4" />
          </Button>
-         <Button size="icon" variant="destructive">
+         <Button variant="destructive" size="icon">
           <Trash2 className="h-4 w-4" />
          </Button>
         </TableCell>
@@ -50,7 +54,7 @@ export function SettingsPolicies() {
       ))}
      </TableBody>
     </Table>
-   </Card>
+   </div>
   </section>
  )
 }

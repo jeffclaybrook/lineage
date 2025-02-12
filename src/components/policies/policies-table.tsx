@@ -3,11 +3,11 @@
 import { useState } from "react"
 import { ColumnDef, ColumnFiltersState, SortingState, VisibilityState, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table"
 import { ArrowUpDown, ChevronDown, MoreVertical, Upload } from "lucide-react"
-import { Button } from "./ui/button"
-import { Checkbox } from "./ui/checkbox"
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu"
-import { Input } from "./ui/input"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table"
+import { Button } from "../ui/button"
+import { Checkbox } from "../ui/checkbox"
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu"
+import { Input } from "../ui/input"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table"
 import { PoliciesCreate } from "./policies-create"
 
 export type Policy = {
@@ -236,7 +236,7 @@ export function PoliciesTable() {
  })
 
  return (
-  <div className="col-span-12">
+  <div className="p-4">
    <div className="flex items-center justify-between gap-8 pb-4">
     <div className="flex items-center gap-4 flex-1">
      <Input

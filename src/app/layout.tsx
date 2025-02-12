@@ -2,8 +2,8 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { ReactNode } from "react"
 import { SidebarProvider } from "@/components/ui/sidebar"
-import { Navbar } from "@/components/navbar"
-import { ThemeProvider } from "@/components/theme-provider"
+import { Navbar } from "@/components/common/navbar"
+import { ThemeProvider } from "@/components/common/theme-provider"
 import "./globals.css"
 
 const inter = Inter({

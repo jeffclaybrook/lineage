@@ -3,53 +3,35 @@
 import Link from "next/link"
 import { ComponentProps } from "react"
 import { usePathname } from "next/navigation"
-import { BadgeCheck, Bell, BookOpen, Calendar, ChartColumn, ChevronsUpDown, CreditCard, LogOut, Map, Settings, Sparkles, Users } from "lucide-react"
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu"
-import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarRail, useSidebar } from "./ui/sidebar"
+import { BadgeCheck, Bell, BookOpen, Calendar, ChartColumn, ChevronsUpDown, CreditCard, LogOut, LucideIcon, Map, Settings, Sparkles, Users } from "lucide-react"
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu"
+import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarRail, useSidebar } from "../ui/sidebar"
 
-const links = [
- {
-  title: "Leads",
-  href: "/",
-  icon: Users
- },
- {
-  title: "Map",
-  href: "/map",
-  icon: Map
- },
- {
-  title: "Calendar",
-  href: "/calendar",
-  icon: Calendar
- },
- {
-  title: "Policies",
-  href: "/policies",
-  icon: BookOpen
- },
- {
-  title: "Metrics",
-  href: "/metrics",
-  icon: ChartColumn
- },
- {
-  title: "Settings",
-  href: "/settings",
-  icon: Settings
- }
+export type NavLink = {
+ label: string
+ href: string
+ icon: LucideIcon
+}
+
+const links: NavLink[] = [
+ { label: "Leads", href: "/", icon: Users },
+ { label: "Map", href: "/map", icon: Map },
+ { label: "Calendar", href: "/calendar", icon: Calendar },
+ { label: "Policies", href: "/policies", icon: BookOpen },
+ { label: "Metrics", href: "/metrics", icon: ChartColumn },
+ { label: "Settings", href: "/settings", icon: Settings }
 ]
 
 export function Navbar({ ...props }: ComponentProps<typeof Sidebar>) {
  const { isMobile } = useSidebar()
  const pathname = usePathname()
- 
+
  return (
   <Sidebar collapsible="icon" {...props}>
    <SidebarHeader>
     <Avatar className="h-8 w-8 rounded-lg p-1">
-     <AvatarImage src="/lineage-logo.png" alt="Lineage" />
+     <AvatarImage src="/logo.png" alt="Lineage" />
      <AvatarFallback className="rounded-lg">SB</AvatarFallback>
     </Avatar>
    </SidebarHeader>
@@ -59,11 +41,11 @@ export function Navbar({ ...props }: ComponentProps<typeof Sidebar>) {
      <SidebarGroupContent>
       <SidebarMenu>
        {links.map((link) => (
-        <SidebarMenuItem key={link.title}>
+        <SidebarMenuItem key={link.label}>
          <SidebarMenuButton asChild>
           <Link href={link.href} className={pathname === link.href ? "bg-sidebar-accent text-sidebar-accent-foreground" : ""}>
            <link.icon />
-           <span>{link.title}</span>
+           <span>{link.label}</span>
           </Link>
          </SidebarMenuButton>
         </SidebarMenuItem>

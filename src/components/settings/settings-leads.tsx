@@ -1,10 +1,14 @@
 import { Pencil, Plus, Trash2 } from "lucide-react"
-import { Button } from "./ui/button"
-import { Card } from "./ui/card"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table"
+import { Button } from "../ui/button"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table"
 
-const data = [
- { label: "Agent follow-up", color: "#ff7f50" },
+export type Status = {
+ label: "Agent Follow Up" | "Appointment" | "Calling" | "Customer" | "Dead Lead" | "Door Knock" | "New Lead" | "No Show" | "Setter Follow Up"
+ color: "#ff7f50" | "#ff0000" | "#01bfff" | "#008800" | "#000000" | "#ffd700" | "#1d00ff" | "#a0522d" | "#4682b4"
+}
+
+const status: Status[] = [
+ { label: "Agent Follow Up", color: "#ff7f50" },
  { label: "Appointment", color: "#ff0000" },
  { label: "Calling", color: "#01bfff" },
  { label: "Customer", color: "#008800" },
@@ -12,7 +16,7 @@ const data = [
  { label: "Door Knock", color: "#ffd700" },
  { label: "New Lead", color: "#1d00ff" },
  { label: "No Show", color: "#a0522d" },
- { label: "Setter follow-up", color: "#4682b4" },
+ { label: "Setter Follow Up", color: "#4682b4" }
 ]
 
 export function SettingsLeads() {
@@ -22,7 +26,7 @@ export function SettingsLeads() {
     <Plus />
     Create New Status
    </Button>
-   <Card>
+   <div className="border rounded-md">
     <Table>
      <TableHeader>
       <TableRow>
@@ -32,25 +36,25 @@ export function SettingsLeads() {
       </TableRow>
      </TableHeader>
      <TableBody>
-      {data.map((status, i) => (
+      {status.map((status, i) => (
        <TableRow key={i}>
         <TableCell>{status.label}</TableCell>
         <TableCell>
-         <span className={`flex w-4 h-4 rounded-md bg-[${status.color}]`} />
+         <span className="h-4 w-4 flex rounded-full" style={{ backgroundColor: `${status.color}`}} />
         </TableCell>
         <TableCell className="flex items-center justify-end gap-2">
-         <Button size="icon" variant="secondary">
-          <Pencil className="w-4 h-4" />
+         <Button variant="secondary" size="icon">
+          <Pencil className="h-4 w-4" />
          </Button>
-         <Button size="icon" variant="destructive">
-          <Trash2 className="w-4 h-4" />
+         <Button variant="destructive" size="icon">
+          <Trash2 className="h-4 w-4" />
          </Button>
         </TableCell>
        </TableRow>
       ))}
      </TableBody>
     </Table>
-   </Card>
+   </div>
   </section>
  )
 }
