@@ -236,7 +236,7 @@ export function PoliciesTable() {
  })
 
  return (
-  <div className="p-4">
+  <div className="col-span-12">
    <div className="flex items-center justify-between gap-8 pb-4">
     <div className="flex items-center gap-4 flex-1">
      <Input

@@ -8,7 +8,7 @@ export default function Policies() {
   <main className="flex flex-1 flex-col w-full pb-4">
    <Header title="Policies" />
    <Suspense fallback={<Loader />}>
-    <div className="p-4">
+    <div className="grid grid-cols-12 gap-4 p-4">
      <PoliciesTable />
     </div>
    </Suspense>
