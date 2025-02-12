@@ -1,4 +1,6 @@
 import { Play, Plus, SquarePen, Trash2 } from "lucide-react"
+import { Avatar, AvatarFallback } from "./ui/avatar"
+import { Badge } from "./ui/badge"
 import { Button } from "./ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table"
@@ -62,6 +64,31 @@ export function SettingsCalling() {
       <Button size="icon" variant="destructive">
        <Trash2 />
       </Button>
+     </div>
+    </CardContent>
+   </Card>
+   <Card className="col-span-12">
+    <CardHeader>
+     <div className="flex flex-col space-y-1">
+      <CardTitle className="text-sm">Caller Access</CardTitle>
+      <CardDescription>List of users with caller access</CardDescription>
+     </div>
+    </CardHeader>
+    <CardContent className="flex flex-col space-y-3">
+     <div className="flex items-center justify-between">
+      <div className="flex items-center gap-4">
+       <Avatar>
+        <AvatarFallback>JC</AvatarFallback>
+       </Avatar>
+       <div className="flex flex-col">
+        <div className="flex gap-4">
+         <p>Jeffrey Claybrook</p>
+         <Badge variant="outline">Enabled</Badge>
+        </div>
+        <p>jeffreyclaybrook15@gmail.com</p>
+       </div>
+      </div>
+      <Button variant="destructive">Disable</Button>
      </div>
     </CardContent>
    </Card>

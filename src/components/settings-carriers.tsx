@@ -11,6 +11,11 @@ const data = [
   carrierName: "Aetna",
   carrierPlanCode: "AETN-01",
   carrierPlanName: "AETN *Level & Graded Age 60-80"
+ },
+ {
+  carrierName: "American Amicable",
+  carrierPlanCode: "AMAM-01",
+  carrierPlanName: "American Amicable"
  }
 ]
 

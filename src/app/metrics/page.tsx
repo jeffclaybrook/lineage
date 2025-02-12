@@ -1,5 +1,5 @@
 import { Suspense } from "react"
-import { DollarSign, Users, UserCheck, UserPlus } from "lucide-react"
+import { CircleDollarSign, DollarSign, DoorOpen, Phone, Users, UserCheck, UserPlus } from "lucide-react"
 import { MetricsAreaChart } from "@/components/metrics-area-chart"
 import { MetricsBarChart } from "@/components/metrics-bar-chart"
 import { MetricsCard } from "@/components/metrics-card"
@@ -34,10 +34,28 @@ export default function Metrics() {
       Icon={DollarSign}
      />
      <MetricsCard
-      title="+216"
+      title="216"
       description="This month"
       label="New Leads"
       Icon={UserPlus}
+     />
+     <MetricsCard
+      title="$1,280"
+      description="Spent on leads"
+      label="Amount Spent on Leads"
+      Icon={CircleDollarSign}
+     />
+     <MetricsCard
+      title="1,126"
+      description="This year"
+      label="Calls made"
+      Icon={Phone}
+     />
+     <MetricsCard
+      title="126"
+      description="This year"
+      label="Doors knocked"
+      Icon={DoorOpen}
      />
      <MetricsBarChart />
      <MetricsPieChart />

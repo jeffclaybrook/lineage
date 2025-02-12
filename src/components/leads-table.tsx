@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { ColumnDef, ColumnFiltersState, SortingState, VisibilityState, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
+import { ArrowUpDown, ChevronDown, MoreVertical } from "lucide-react"
 import { Button } from "./ui/button"
 import { Checkbox } from "./ui/checkbox"
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu"
@@ -289,7 +289,7 @@ export const columns: ColumnDef<Lead>[] = [
     <DropdownMenu>
      <DropdownMenuTrigger asChild>
       <Button variant="ghost" className="h-8 w-8 p-0">
-       <MoreHorizontal />
+       <MoreVertical />
        <span className="sr-only">Open menu</span>
       </Button>
      </DropdownMenuTrigger>
