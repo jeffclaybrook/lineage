@@ -2,11 +2,15 @@
 
 import { useMemo, useState } from "react"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
-import { Card } from "@/components/ui/card"
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "./ui/chart"
 
-const data = [
- { date: "2025-01-01", leads: 178, customers: 200 },
+export type Data = {
+ date: string
+ leads: number
+ customers: number
+}
+
+const data: Data[] = [
  { date: "2025-01-02", leads: 470, customers: 410 },
  { date: "2025-01-03", leads: 103, customers: 160 },
  { date: "2025-01-04", leads: 439, customers: 380 },
@@ -39,9 +43,6 @@ const data = [
 ]
 
 const config = {
- leadsVsCustomers: {
-  label: "Leads vs. Customers"
- },
  leads: {
   label: "Leads",
   color: "hsl(var(--chart-1))"
@@ -49,7 +50,7 @@ const config = {
  customers: {
   label: "Customers",
   color: "hsl(var(--chart-2))"
- }
+ },
 } satisfies ChartConfig
 
 export function MetricsBarChart() {
@@ -61,7 +62,7 @@ export function MetricsBarChart() {
  }), [])
 
  return (
-  <Card className="col-span-12">
+  <div className="col-span-12 border rounded-md">
    <div className="flex">
     {["leads", "customers"].map((key) => {
      const chart = key as keyof typeof config
@@ -73,13 +74,13 @@ export function MetricsBarChart() {
        className="relative z-30 flex flex-1 flex-col justify-center gap-1 px-6 py-4 text-left even:border-l data-[active=true]:bg-muted/50 sm:px-8 sm:py-6"
       >
        <span className="text-xs text-muted-foreground">{config[chart].label}</span>
-       <span className="text-lg font-bold leading-none sm:text-3xl">{total[key as keyof typeof total].toLocaleString()}</span>
+       <span className="text-2xl font-semibold leading-none">{total[key as keyof typeof total].toLocaleString()}</span>
       </button>
      )
     })}
    </div>
    <ChartContainer config={config} className="w-full max-h-[300px] p-4">
-    <BarChart
+   <BarChart
      accessibilityLayer
      data={data}
      margin={{
@@ -123,6 +124,6 @@ export function MetricsBarChart() {
      />
     </BarChart>
    </ChartContainer>
-  </Card>
+  </div>
  )
 }
