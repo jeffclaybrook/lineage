@@ -1,17 +1,15 @@
 "use client"
 
 import * as z from "zod"
-import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { toast } from "sonner"
 import { format } from "date-fns"
-import { Calendar as CalendarIcon, CloudUpload, Paperclip, Plus } from "lucide-react"
+import { Calendar as CalendarIcon, Plus } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "../ui/alert-dialog"
 import { Button } from "../ui/button"
 import { Calendar } from "../ui/calendar"
-import { FileInput, FileUploader, FileUploaderContent, FileUploaderItem } from "../ui/file-upload"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { Input } from "../ui/input"
 import { PhoneInput } from "../ui/phone-input"
@@ -23,13 +21,11 @@ export type State = {
  label: string
 }
 
-export type Source = {
- value: string
+export type Carrier = {
  label: string
 }
 
-export type Status = {
- value: string
+export type Plan = {
  label: string
 }
 
@@ -86,29 +82,20 @@ const states: State[] = [
  { value: "wyoming", label: "Wyoming" }
 ]
 
-const sources: Source[] = [
- { value: "directMail", label: "Direct Mail" },
- { value: "fexDirectMail", label: "FEX Direct Mail" },
- { value: "fexInternet", label: "FEX Internet" },
- { value: "internet", label: "Internet" },
- { value: "medicareDirectMail", label: "Medicare Direct Mail" },
- { value: "medicareInternet", label: "Medicare Internet" },
- { value: "other", label: "Other" },
- { value: "telemarket", label: "Telemarket" }
+const carriers: Carrier[] = [
+ { label: "Accendo" },
+ { label: "Aetna" },
+ { label: "Aflac" },
+ { label: "Allianz" },
+ { label: "American Amicable" },
+ { label: "American General" },
+ { label: "American Memorial" },
+ { label: "Americo" },
 ]
 
-const statuses: Status[] = [
- { value: "agentFollowUp", label: "Agent Follow-up" },
- { value: "appointment", label: "Appointment" },
- { value: "calling", label: "Calling" },
- { value: "customer", label: "Customer" },
- { value: "deadLead", label: "Dead Lead" },
- { value: "doorKnock", label: "Door Knock" },
- { value: "exhausted", label: "Exhausted" },
- { value: "followUp", label: "Follow-up" },
- { value: "newLead", label: "New Lead" },
- { value: "other", label: "Other" },
- { value: "setterFollowUp", label: "Setter Follow-up" }
+const plans: Plan[] = [
+ { label: "Level Age 45-80" },
+ { label: "Modified Age 45-75" },
 ]
 
 const formSchema = z.object({
@@ -120,27 +107,15 @@ const formSchema = z.object({
  state: z.string().optional(),
  zip: z.string().optional(),
  county: z.string().optional(),
- dateOfBirth: z.coerce.date().optional(),
- leadSource: z.string().optional(),
- leadStatus: z.string().optional(),
  dateReceived: z.coerce.date().optional(),
- notes: z.string().optional(),
- attachments: z.string().optional()
+ carrier: z.string().optional(),
+ plans: z.string().optional()
 })
 
-export function LeadsCreate() {
- const [files, setFiles] = useState<File[] | null>(null)
-
- const dropZoneConfig = {
-  maxFiles: 5,
-  maxSize: 1024 * 1024 * 4,
-  multiple: true
- }
-
+export function SettingsCreatePolicy() {
  const form = useForm<z.infer<typeof formSchema>>({
   resolver: zodResolver(formSchema),
   defaultValues: {
-   "dateOfBirth": new Date(),
    "dateReceived": new Date(),
   }
  })
@@ -162,13 +137,13 @@ export function LeadsCreate() {
  return (
   <AlertDialog>
    <AlertDialogTrigger asChild>
-    <Button>
-     <Plus /> Create
+    <Button className="ml-auto">
+     <Plus /> Create New Policy
     </Button>
    </AlertDialogTrigger>
    <AlertDialogContent className="max-w-2xl overflow-auto">
     <AlertDialogHeader>
-     <AlertDialogTitle>Create lead</AlertDialogTitle>
+     <AlertDialogTitle>Create policy</AlertDialogTitle>
     </AlertDialogHeader>
      <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-12 gap-4">
@@ -332,10 +307,10 @@ export function LeadsCreate() {
        <div className="col-span-4">
         <FormField
          control={form.control}
-         name="dateOfBirth"
+         name="dateReceived"
          render={({ field }) => (
           <FormItem>
-           <FormLabel>Date of birth</FormLabel>
+           <FormLabel>Date received</FormLabel>
            <Popover>
             <PopoverTrigger asChild>
              <FormControl>
@@ -372,19 +347,19 @@ export function LeadsCreate() {
        <div className="col-span-4">
         <FormField
          control={form.control}
-         name="leadSource"
+         name="carrier"
          render={({ field }) => (
           <FormItem>
-           <FormLabel>Lead Source</FormLabel>
+           <FormLabel>Carrier</FormLabel>
            <Select onValueChange={field.onChange} defaultValue={field.value}>
             <FormControl>
              <SelectTrigger>
-              <SelectValue placeholder="Lead source" />
+              <SelectValue placeholder="Carrier" />
              </SelectTrigger>
             </FormControl>
             <SelectContent>
-             {sources.map((source, i) => (
-              <SelectItem key={i} value={source.value}>{source.label}</SelectItem>
+             {carriers.map((carrier, i) => (
+              <SelectItem key={i} value={carrier.label}>{carrier.label}</SelectItem>
              ))}
             </SelectContent>
            </Select>
@@ -396,10 +371,10 @@ export function LeadsCreate() {
        <div className="col-span-4">
         <FormField
          control={form.control}
-         name="leadStatus"
+         name="plans"
          render={({ field }) => (
           <FormItem>
-           <FormLabel>Lead Status</FormLabel>
+           <FormLabel>Plan</FormLabel>
            <Select onValueChange={field.onChange} defaultValue={field.value}>
             <FormControl>
              <SelectTrigger>
@@ -407,61 +382,14 @@ export function LeadsCreate() {
              </SelectTrigger>
             </FormControl>
             <SelectContent>
-             {statuses.map((status, i) => (
-              <SelectItem key={i} value={status.value}>{status.label}</SelectItem>
+             {plans.map((plan, i) => (
+              <SelectItem key={i} value={plan.label}>{plan.label}</SelectItem>
              ))}
             </SelectContent>
            </Select>
            <FormMessage />
           </FormItem>
          )}
-        />
-       </div>
-       <div className="col-span-12">
-        <FormField
-         control={form.control}
-         name="attachments"
-         render={({ field }) => {
-          console.log(field)
-          return (
-           <FormItem>
-            <FormLabel>Attachments</FormLabel>
-            <FormControl>
-             <FileUploader
-              value={files}
-              onValueChange={setFiles}
-              dropzoneOptions={dropZoneConfig}
-              className="relative bg-background rounded-lg p-2"
-             >
-              <FileInput
-               id="fileInput"
-               className="outline-dashed outline-1 outline-slate-500"
-              >
-               <div className="flex items-center justify-center flex-col p-8 w-full">
-                <CloudUpload className="text-gray-500 w-10 h-10" />
-                <p className="mb-1 text-sm text-gray-500 dark:text-gray-400">
-                 <span className="font-semibold">Click to Upload</span>
-                 &nbsp; or drag and drop
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG, PDF, or GIF</p> 
-               </div>
-              </FileInput>
-              <FileUploaderContent>
-               {files &&
-                files.length > 0 &&
-                files.map((file, i) => (
-                 <FileUploaderItem key={i} index={i}>
-                  <Paperclip className="h-4 w-4 stroke-current" />
-                  <span>{file.name}</span>
-                 </FileUploaderItem>
-                ))
-               }
-              </FileUploaderContent>
-             </FileUploader>
-           </FormControl>
-          </FormItem>
-          )
-         }}
         />
        </div>
        <div className="col-span-12">

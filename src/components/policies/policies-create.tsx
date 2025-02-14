@@ -1,15 +1,31 @@
-import { CalendarIcon, Plus } from "lucide-react"
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "../ui/alert-dialog"
+"use client"
+
+import * as z from "zod"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { toast } from "sonner"
+import { format } from "date-fns"
+import { Calendar as CalendarIcon, Plus } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "../ui/alert-dialog"
 import { Button } from "../ui/button"
 import { Calendar } from "../ui/calendar"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { Input } from "../ui/input"
-import { Label } from "../ui/label"
+import { PhoneInput } from "../ui/phone-input"
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select"
-import { Separator } from "../ui/separator"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 
 export type State = {
  value: string
+ label: string
+}
+
+export type Carrier = {
+ label: string
+}
+
+export type Plan = {
  label: string
 }
 
@@ -66,7 +82,58 @@ const states: State[] = [
  { value: "wyoming", label: "Wyoming" }
 ]
 
+const carriers: Carrier[] = [
+ { label: "Accendo" },
+ { label: "Aetna" },
+ { label: "Aflac" },
+ { label: "Allianz" },
+ { label: "American Amicable" },
+ { label: "American General" },
+ { label: "American Memorial" },
+ { label: "Americo" },
+]
+
+const plans: Plan[] = [
+ { label: "Level Age 45-80" },
+ { label: "Modified Age 45-75" },
+]
+
+const formSchema = z.object({
+ name: z.string(),
+ phone: z.string().optional(),
+ email: z.string().optional(),
+ address: z.string().optional(),
+ city: z.string().optional(),
+ state: z.string().optional(),
+ zip: z.string().optional(),
+ county: z.string().optional(),
+ dateReceived: z.coerce.date().optional(),
+ carrier: z.string().optional(),
+ plans: z.string().optional()
+})
+
 export function PoliciesCreate() {
+ const form = useForm<z.infer<typeof formSchema>>({
+  resolver: zodResolver(formSchema),
+  defaultValues: {
+   "dateReceived": new Date(),
+  }
+ })
+
+ const onSubmit = (values: z.infer<typeof formSchema>) => {
+  try {
+   console.log(values)
+   toast(
+    <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+     <code className="text-white">{JSON.stringify(values, null, 2)}</code>
+    </pre>
+   )
+  } catch (error) {
+   console.error("Form submission error", error)
+   toast.error("Unable to submit form. Please try again.")
+  }
+ }
+
  return (
   <AlertDialog>
    <AlertDialogTrigger asChild>
@@ -74,117 +141,265 @@ export function PoliciesCreate() {
      <Plus /> Create
     </Button>
    </AlertDialogTrigger>
-   <AlertDialogContent>
+   <AlertDialogContent className="max-w-2xl overflow-auto">
     <AlertDialogHeader>
      <AlertDialogTitle>Create policy</AlertDialogTitle>
-     <AlertDialogDescription>Create a new policy</AlertDialogDescription>
     </AlertDialogHeader>
-    <form className="grid lg:grid-cols-12 gap-4">
-     <div className="col-span-6 space-y-1.5">
-      <Label htmlFor="firstName">First Name</Label>
-      <Input type="text" id="firstName" placeholder="First Name" />
-     </div>
-     <div className="col-span-6 space-y-1.5">
-      <Label htmlFor="lastName">Last Name</Label>
-      <Input type="text" id="lastName" placeholder="Last Name" />
-     </div>
-     <div className="col-span-6 space-y-1.5">
-      <Label htmlFor="address">Address</Label>
-      <Input type="text" id="address" placeholder="Address" />
-     </div>
-     <div className="col-span-3 space-y-1.5">
-      <Label htmlFor="city">City</Label>
-      <Input type="text" id="city" placeholder="City" />
-     </div>
-     <div className="col-span-3 space-y-1.5">
-      <Label htmlFor="city">State</Label>
-      <Select>
-       <SelectTrigger>
-        <SelectValue placeholder="State" />
-       </SelectTrigger>
-       <SelectContent>
-        <SelectGroup>
-         <SelectLabel>States</SelectLabel>
-         {states.map((state, i) => (
-          <SelectItem key={i} value={state.value}>{state.label}</SelectItem>
-         ))}
-        </SelectGroup>
-       </SelectContent>
-      </Select>
-     </div>
-     <div className="col-span-3 space-y-1.5">
-      <Label htmlFor="zip">Zip</Label>
-      <Input type="text" id="zip" placeholder="Zip" />
-     </div>
-     <div className="col-span-4 space-y-1.5">
-      <Label htmlFor="county">County</Label>
-      <Input type="text" id="county" placeholder="County" />
-     </div>
-     <div className="col-span-5 space-y-1.5">
-      <Label htmlFor="phone">Phone</Label>
-      <Input type="text" id="phone" placeholder="Phone" />
-     </div>
-     <div className="col-span-4 space-y-1.5">
-      <Label htmlFor="dateOfBirth">Date of Birth</Label>
-      <Popover>
-       <PopoverTrigger asChild>
-        <div>
-         <Button variant="outline" className="flex items-center justify-between w-full" type="button">
-          Select a Date
-          <CalendarIcon />
-         </Button>
-        </div>
-       </PopoverTrigger>
-       <PopoverContent className="w-auto p-0" align="start">
-        <Calendar mode="single" />
-       </PopoverContent>
-      </Popover>
-     </div>
-     <div className="col-span-4 space-y-1.5">
-      <Label htmlFor="gender">Gender</Label>
-      <Select>
-       <SelectTrigger>
-        <SelectValue placeholder="Gender" />
-       </SelectTrigger>
-       <SelectContent>
-        <SelectGroup>
-         <SelectLabel>Gender</SelectLabel>
-         <SelectItem value="male">Male</SelectItem>
-         <SelectItem value="female">Female</SelectItem>
-         <SelectItem value="other">Other</SelectItem>
-        </SelectGroup>
-       </SelectContent>
-      </Select>
-     </div>
-     <div className="col-span-4 space-y-1.5">
-      <Label htmlFor="tobaccoUse">Tobacco Use</Label>
-      <Select>
-       <SelectTrigger>
-        <SelectValue placeholder="Select" />
-       </SelectTrigger>
-       <SelectContent>
-        <SelectGroup>
-         <SelectLabel>Tobacco Use</SelectLabel>
-         <SelectItem value="smoker">Smoker</SelectItem>
-         <SelectItem value="nonSmoker">Non-smoker</SelectItem>
-         <SelectItem value="chewerDipper">Chewer / Dipper</SelectItem>
-         <SelectItem value="unknown">Unknown</SelectItem>
-         <SelectItem value="eCig">E-Cig</SelectItem>
-         <SelectItem value="cigar">Cigar</SelectItem>
-        </SelectGroup>
-       </SelectContent>
-      </Select>
-     </div>
-     <Separator className="col-span-12 my-4" />
-     <div className="col-span-6 space-y-1.5">
-      <Label htmlFor="policyNumber">Policy Number</Label>
-      <Input type="text" id="policyNumber" placeholder="Policy Number" />
-     </div>
-    </form>
-    <AlertDialogFooter>
-     <AlertDialogCancel>Cancel</AlertDialogCancel>
-     <AlertDialogAction>Save</AlertDialogAction>
-    </AlertDialogFooter>
+     <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-12 gap-4">
+       <div className="col-span-6">
+        <FormField
+         control={form.control}
+         name="name"
+         render={({ field }) => (
+          <FormItem>
+           <FormLabel>Name</FormLabel>
+           <FormControl>
+            <Input
+             type="text"
+             placeholder="Name"
+             {...field}
+            />
+           </FormControl>
+           <FormMessage />
+          </FormItem>
+         )}
+        />
+       </div>
+       <div className="col-span-6">
+        <FormField
+         control={form.control}
+         name="phone"
+         render={({ field }) => (
+          <FormItem>
+           <FormLabel>Phone</FormLabel>
+           <FormControl>
+            <PhoneInput
+             placeholder="Phone"
+             defaultCountry="US"
+             {...field}
+            />
+           </FormControl>
+           <FormMessage />
+          </FormItem>
+         )}
+        />
+       </div>
+       <div className="col-span-6">
+        <FormField
+         control={form.control}
+         name="email"
+         render={({ field }) => (
+          <FormItem>
+           <FormLabel>Email</FormLabel>
+           <FormControl>
+            <Input
+             type="email"
+             placeholder="Email"
+             {...field}
+            />
+           </FormControl>
+           <FormMessage />
+          </FormItem>
+         )}
+        />
+       </div>
+       <div className="col-span-6">
+        <FormField
+         control={form.control}
+         name="address"
+         render={({ field }) => (
+          <FormItem>
+           <FormLabel>Address</FormLabel>
+           <FormControl>
+            <Input
+             type="text"
+             placeholder="Address"
+             {...field}
+            />
+           </FormControl>
+           <FormMessage />
+          </FormItem>
+         )}
+        />
+       </div>
+       <div className="col-span-3">
+        <FormField
+         control={form.control}
+         name="city"
+         render={({ field }) => (
+          <FormItem>
+           <FormLabel>City</FormLabel>
+           <FormControl>
+            <Input
+             type="text"
+             placeholder="City"
+             {...field}
+            />
+           </FormControl>
+           <FormMessage />
+          </FormItem>
+         )}
+        />
+       </div>
+       <div className="col-span-3">
+        <FormField
+         control={form.control}
+         name="state"
+         render={({ field }) => (
+          <FormItem>
+           <FormLabel>State</FormLabel>
+           <Select onValueChange={field.onChange} defaultValue={field.value}>
+            <FormControl>
+             <SelectTrigger>
+              <SelectValue placeholder="State" />
+             </SelectTrigger>
+            </FormControl>
+            <SelectContent>
+             {states.map((state, i) => (
+              <SelectItem key={i} value={state.value}>{state.label}</SelectItem>
+             ))}
+            </SelectContent>
+           </Select>
+           <FormMessage />
+          </FormItem>
+         )}
+        />
+       </div>
+       <div className="col-span-3">
+        <FormField
+         control={form.control}
+         name="zip"
+         render={({ field }) => (
+          <FormItem>
+           <FormLabel>Zip</FormLabel>
+           <FormControl>
+            <Input
+             type="text"
+             placeholder="Zip"
+             {...field}
+            />
+           </FormControl>
+           <FormMessage />
+          </FormItem>
+         )}
+        />
+       </div>
+       <div className="col-span-3">
+        <FormField
+         control={form.control}
+         name="county"
+         render={({ field }) => (
+          <FormItem>
+           <FormLabel>County</FormLabel>
+           <FormControl>
+            <Input
+             type="text"
+             placeholder="County"
+             {...field}
+            />
+           </FormControl>
+           <FormMessage />
+          </FormItem>
+         )}
+        />
+       </div>
+       <div className="col-span-4">
+        <FormField
+         control={form.control}
+         name="dateReceived"
+         render={({ field }) => (
+          <FormItem>
+           <FormLabel>Date received</FormLabel>
+           <Popover>
+            <PopoverTrigger asChild>
+             <FormControl>
+              <Button
+               variant={"outline"}
+               className={cn(
+                "w-full pl-3 text-left font-normal",
+                !field.value && "text-muted-foreground"
+               )}
+              >
+               {field.value ? (
+                format(field.value, "PPP")
+               ) : (
+                <span>Pick a date</span>
+               )}
+               <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+              </Button>
+             </FormControl>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+             <Calendar
+              mode="single"
+              selected={field.value}
+              onSelect={field.onChange}
+              initialFocus
+             />
+            </PopoverContent>
+           </Popover>
+           <FormMessage />
+          </FormItem>
+         )}
+        />
+       </div>
+       <div className="col-span-4">
+        <FormField
+         control={form.control}
+         name="carrier"
+         render={({ field }) => (
+          <FormItem>
+           <FormLabel>Carrier</FormLabel>
+           <Select onValueChange={field.onChange} defaultValue={field.value}>
+            <FormControl>
+             <SelectTrigger>
+              <SelectValue placeholder="Carrier" />
+             </SelectTrigger>
+            </FormControl>
+            <SelectContent>
+             {carriers.map((carrier, i) => (
+              <SelectItem key={i} value={carrier.label}>{carrier.label}</SelectItem>
+             ))}
+            </SelectContent>
+           </Select>
+           <FormMessage />
+          </FormItem>
+         )}
+        />
+       </div>
+       <div className="col-span-4">
+        <FormField
+         control={form.control}
+         name="plans"
+         render={({ field }) => (
+          <FormItem>
+           <FormLabel>Plan</FormLabel>
+           <Select onValueChange={field.onChange} defaultValue={field.value}>
+            <FormControl>
+             <SelectTrigger>
+              <SelectValue placeholder="Lead status" />
+             </SelectTrigger>
+            </FormControl>
+            <SelectContent>
+             {plans.map((plan, i) => (
+              <SelectItem key={i} value={plan.label}>{plan.label}</SelectItem>
+             ))}
+            </SelectContent>
+           </Select>
+           <FormMessage />
+          </FormItem>
+         )}
+        />
+       </div>
+       <div className="col-span-12">
+        <AlertDialogFooter>
+         <AlertDialogCancel type="button">Cancel</AlertDialogCancel>
+         <AlertDialogAction type="submit">Save</AlertDialogAction>
+        </AlertDialogFooter>
+       </div>
+      </form>
+     </Form>
    </AlertDialogContent>
   </AlertDialog>
  )

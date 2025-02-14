@@ -1,6 +1,7 @@
-import { Pencil, Plus, Trash2 } from "lucide-react"
+import { Pencil, Trash2 } from "lucide-react"
 import { Button } from "../ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table"
+import { SettingsCreatePolicy } from "./settings-create-policy"
 
 export type Policy = {
  label: "Waiting to Submit" | "Submitted to Carrier" | "Active Policy" | "Not Taken by Client" | "Declined by Carrier" | "Client Deceased" | "In Danger of Lapse" | "Lapsed" | "Cancelled"
@@ -22,10 +23,7 @@ const policies: Policy[] = [
 export function SettingsPolicies() {
  return (
   <section className="flex flex-col gap-4 p-4">
-   <Button className="ml-auto">
-    <Plus />
-    Create New Policy
-   </Button>
+   <SettingsCreatePolicy />
    <div className="border rounded-md">
     <Table>
      <TableHeader>

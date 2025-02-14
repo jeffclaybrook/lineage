@@ -1,6 +1,5 @@
 import { Headset, PhoneCall, PhoneIncoming, PhoneOutgoing, Play, SquarePen, Trash2 } from "lucide-react"
 import { Avatar, AvatarFallback } from "../ui/avatar"
-import { Badge } from "../ui/badge"
 import { Button } from "../ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table"
 
@@ -93,10 +92,7 @@ export function SettingsCalling() {
         <AvatarFallback>JC</AvatarFallback>
        </Avatar>
        <div className="flex flex-col">
-        <div className="flex gap-4">
-         <p>Jeffrey Claybrook</p>
-         <Badge>Enabled</Badge>
-        </div>
+        <p>Jeffrey Claybrook</p>
         <p>jeff@silverbow.io</p>
        </div>
       </div>
@@ -108,10 +104,7 @@ export function SettingsCalling() {
         <AvatarFallback>JW</AvatarFallback>
        </Avatar>
        <div className="flex flex-col">
-        <div className="flex gap-4">
-         <p>Joe Williamson</p>
-         <Badge variant="outline">Disabled</Badge>
-        </div>
+        <p>Joe Williamson</p>
         <p>joe@silverbow.io</p>
        </div>
       </div>

@@ -1,6 +1,7 @@
-import { Pencil, Plus, Trash2 } from "lucide-react"
+import { Pencil, Trash2 } from "lucide-react"
 import { Button } from "../ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table"
+import { SettingsCreateStatus } from "./settings-create-status"
 
 export type Status = {
  label: "Agent Follow Up" | "Appointment" | "Calling" | "Customer" | "Dead Lead" | "Door Knock" | "New Lead" | "No Show" | "Setter Follow Up"
@@ -22,10 +23,7 @@ const status: Status[] = [
 export function SettingsLeads() {
  return (
   <section className="flex flex-col gap-4 p-4">
-   <Button className="ml-auto">
-    <Plus />
-    Create New Status
-   </Button>
+   <SettingsCreateStatus />
    <div className="border rounded-md">
     <Table>
      <TableHeader>

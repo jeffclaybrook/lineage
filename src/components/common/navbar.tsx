@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { ComponentProps } from "react"
 import { usePathname } from "next/navigation"
-import { BadgeCheck, Bell, BookOpen, Calendar, ChartColumn, ChevronsUpDown, CreditCard, LogOut, LucideIcon, Map, Settings, Sparkles, Users } from "lucide-react"
+import { BadgeCheck, Bell, BookOpen, Calendar, ChartColumn, ChevronsUpDown, CircleHelp, CreditCard, LogOut, LucideIcon, Map, Settings, Users } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu"
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarRail, useSidebar } from "../ui/sidebar"
@@ -92,9 +92,9 @@ export function Navbar({ ...props }: ComponentProps<typeof Sidebar>) {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
          <DropdownMenuItem>
-          <Link href={"/upgrade-to-pro"} className="flex items-center gap-2 w-full">
-           <Sparkles />
-           Upgrade to Pro
+          <Link href={"/support"} className="flex items-center gap-2 w-full">
+           <CircleHelp />
+           Support
           </Link>
          </DropdownMenuItem>
         </DropdownMenuGroup>
