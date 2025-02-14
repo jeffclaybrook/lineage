@@ -378,7 +378,7 @@ export function SettingsCreatePolicy() {
            <Select onValueChange={field.onChange} defaultValue={field.value}>
             <FormControl>
              <SelectTrigger>
-              <SelectValue placeholder="Lead status" />
+              <SelectValue placeholder="Plan" />
              </SelectTrigger>
             </FormControl>
             <SelectContent>
